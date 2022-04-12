@@ -5,13 +5,13 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen() {
     Surface(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
     ) {
-        Text(text = "qwe")
+        Text(text = "Test")
     }
 }

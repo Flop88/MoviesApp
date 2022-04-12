@@ -17,50 +17,47 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import kotlinx.coroutines.delay
-import ru.mvlikhachev.moviesapp.navigation.Screen
+import ru.mvlikhachev.moviesapp.navigation.Screens
 import ru.mvlikhachev.moviesapp.ui.theme.MoviesAppTheme
 
 @Composable
 fun SplashScreen(navController: NavController) {
-    var startAnimation by remember { mutableStateOf(false) }
+    var startAnimate by remember {
+        mutableStateOf(false)
+    }
     val alphaAnimation = animateFloatAsState(
-        targetValue = if (startAnimation) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 3000
-        )
+        targetValue = if (startAnimate) 1f else 0f,
+        animationSpec =  tween(durationMillis = 3000)
     )
     LaunchedEffect(key1 = true) {
-        startAnimation = true
+        startAnimate = true
         delay(4000)
-        navController.navigate(Screen.Main.route)
+        navController.navigate(Screens.Main.route)
     }
-
     Splash(alpha = alphaAnimation.value)
 }
 
 @Composable
 fun Splash(alpha: Float) {
     Box(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Icon(
             modifier = Modifier
                 .size(120.dp)
                 .alpha(alpha = alpha),
-            contentDescription = "splash icon",
             imageVector = Icons.Default.PlayArrow,
-            tint = Color.Black,
+            contentDescription = "",
+            tint = Color.Black
         )
     }
 }
 
 @Composable
-@Preview
-fun prevSplashScreen() {
+@Preview(showBackground = true)
+fun prevSplash() {
     MoviesAppTheme {
-        Splash(alpha = 1f)
+        Splash(1f)
     }
 }
-
